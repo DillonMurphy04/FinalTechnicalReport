@@ -1,0 +1,99 @@
+---
+title: "ResultsScript"
+author: "Dillon Murphy"
+format: html
+editor: visual
+---
+
+## Code
+
+```{r Setup}
+#| include: false
+library(kableExtra)
+library(readxl)
+library(tidyverse)
+library(broom)
+library(ggthemes)
+## Change to location of data on your device
+data <- read_excel("C:/Users/Dillon Murphy/OneDrive/Desktop/Spring2023/STAT365/Data.xlsx")
+```
+
+#### Data
+
+```{r}
+data |> head()
+```
+
+#### Table 1: Summary Statistics
+
+```{r}
+data |> group_by(TRT) |> 
+  summarize(
+    n = n(),
+    mean_diff = mean(Diff),
+    median_diff = median(Diff),
+    sd_diff = sd(Diff),
+    min_diff = min(Diff),
+    max_diff = max(Diff)
+  ) |> 
+    kbl(col.names = c("Treatment",
+                    "Sample Size",
+                    "Mean",
+                    "Median",
+                    "Standard Deviation",
+                    "Min",
+                    "Max"),
+      caption = "Table 1: Summary Statistics for Difference in Post and Pre Treatment Stretch Lengths (mm)",
+      digits = 2,
+      table.attr = "style='width:55%;'") |>
+  kable_classic_2(html_font = "Times New Roman",
+                  lightable_options = "striped")
+```
+
+## Results & Discussion
+
+#### Table 2: Two-Sample t-test
+
+```{r}
+ttest <- t.test(Diff ~ TRT, data = data, var.equal = TRUE)
+tidy <- ttest |> tidy()
+tidy$statistic <- sprintf("%.2f", tidy$statistic)
+test <- tidy |> select(estimate1, estimate2, parameter, statistic, p.value) |> 
+  rename("Mean Control" = "estimate1",
+         "Mean Freezer" = "estimate2",
+         "DF" = "parameter",
+         "t-stat" = "statistic",
+         "p-value" = "p.value")
+test$"p-value" <- scales::pvalue(test$"p-value")
+test |> kbl(caption = "Table 2: Two Sample t-test",
+            table.attr = "style='width:35%;'") |> 
+  kable_classic_2() |> 
+  footnote(general = "Null: Mean of Freezer = Mean of Control")
+```
+
+#### Table 3: 95% Confidence Interval
+
+```{r}
+conf <- tidy |> select(estimate, conf.low, conf.high) |> 
+  rename("Estimate" = "estimate", 
+         "Lower" = "conf.low",
+         "Upper" = "conf.high")
+conf$Lower <- sprintf("%.3f", conf$Lower)
+conf$Upper <- sprintf("%.3f", conf$Upper)
+conf |> kbl(caption = "Table 3: 95% Confidence Interval",
+            table.attr = "style='width:25%;'",
+            align = "c") |> 
+  kable_classic_2() |> 
+  footnote(general = "Interval represents the range of values for the difference in means between Treatment 1 (Control) and Treatment 2 (Freezer).") 
+```
+
+#### Figure 1: Box Plot
+
+```{r}
+data |> ggplot(aes(x = TRT, y = Diff)) +
+  geom_boxplot() +
+  geom_jitter(position = position_jitter(width = 0.1, height = 0)) +
+  guides(color = FALSE) +
+  labs(title = "Differential Rubber Band Stretch for Control vs Freezer", subtitle = "Post - Pre Treatment Stretch Length (mm)",  y ='', x = "Treatment") +
+  theme_minimal()
+```
