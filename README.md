@@ -17,7 +17,7 @@ The root folder contains the following sub-folders:
  
  The documents folder contains all written documents related to the study. This includes a document describing in detail all edits made 
  from the initial to the final technical report as well as a document highlighting the changes (red highlights made to the original document show deletions while 
- green highlights show additions made to the final report). Within this folder the project proposal can be found, with in depth steps on reproducing the study (this can also be found in Appendix A in the report). Additionally within the documents folder is a references sub-folder containing all references mentioned 
+ green highlights show additions made to the final report). Within this folder, the project proposal can be found, with in-depth steps on reproducing the study (this can also be found in Appendix A in the report). Additionally within the documents folder is a references sub-folder containing all references mentioned 
  in the technical report.
  
  #### 3. Results
