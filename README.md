@@ -1,6 +1,6 @@
 # Report README
 
-This file provides an overview of the structure and organization of the processes that are used throughout the study described in the article
+This file provides an overview of the structure and organization of the processes that are used throughout the study described in the report
 "An Investigation Into the Effect of Temperature on the Elasticity of Rubber Bands" by Dillon Murphy. It is intended to guide any readers or researchers who
 would like to reproduce the study by providing easy access to the data management, analysis, and documentation undergone in the study.
 
@@ -16,8 +16,8 @@ The root folder contains the following sub-folders:
  #### 2. Documents
  
  The documents folder contains all written documents related to the study. This includes a document describing in detail all edits made 
- from the initial to the final technical report as well as a document highlighting the changes. (red highlights made to the original document show deletions while 
- green highlights show additions made to the final report) Additionally within the documents folder is a references sub-folder containing all references mentioned 
+ from the initial to the final technical report as well as a document highlighting the changes (red highlights made to the original document show deletions while 
+ green highlights show additions made to the final report). Within this folder the project proposal can be found, with in depth steps on reproducing the study (this can also be found in Appendix A in the report). Additionally within the documents folder is a references sub-folder containing all references mentioned 
  in the technical report.
  
  #### 3. Results
