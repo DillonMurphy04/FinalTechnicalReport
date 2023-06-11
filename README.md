@@ -1,6 +1,6 @@
 # Report README
 
-This file provides an overview of the structure and organization of the processes that are repeated throughout the study described in the article
+This file provides an overview of the structure and organization of the processes that are used throughout the study described in the article
 "An Investigation Into the Effect of Temperature on the Elasticity of Rubber Bands" by Dillon Murphy. It is intended to guide any readers or researchers who
 would like to reproduce the study by providing easy access to the data management, analysis, and documentation undergone in the study.
 
